@@ -1,5 +1,7 @@
 package Organization;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 public class Entry {
 	private String myTitle;
 	private double myScore;
@@ -45,6 +47,10 @@ public class Entry {
 	}
 	
 	public String toString(){
-		return this.myTitle + " " + this.myScore + "/" + this.myTotal;
+		return this.myTitle + "           " + this.myScore + "/" + this.myTotal;
+	}
+	
+	public void constructNode(DefaultMutableTreeNode topNode){
+		topNode.add(new DefaultMutableTreeNode(this.toString()));
 	}
 }

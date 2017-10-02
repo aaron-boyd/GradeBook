@@ -1,6 +1,8 @@
 package Organization;
 import java.util.ArrayList;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 public class Category {
 
 	private String myTitle;
@@ -48,6 +50,14 @@ public class Category {
 	public void removeEntry(int i) {
 		this.myEntries.remove(i);
 	}
+	
+	public String toString(){
+		String entries ="";
+		for(Entry e: myEntries){
+			entries += e.toString() + "\n";
+		}
+		return myTitle + "\n" + entries;
+	}
 
 	public double getCategoryGrade() {
 		double score = 0.0;
@@ -63,5 +73,13 @@ public class Category {
 		} else {
 			return this.myWeight;
 		}
+	}
+	
+	public void constructNodes(DefaultMutableTreeNode topNode){
+		DefaultMutableTreeNode catNode = new DefaultMutableTreeNode(this.myTitle);
+		for(Entry e: myEntries){
+			e.constructNode(catNode);
+		}
+		topNode.add(catNode);
 	}
 }

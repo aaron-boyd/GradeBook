@@ -2,6 +2,8 @@ package Organization;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 public class Class {
 	private String myTitle;
 	private ArrayList<Category> myCategories;
@@ -21,6 +23,8 @@ public class Class {
 		this.myTitle = title;
 		this.myCategories = new ArrayList<Category>(categories);
 	}
+
+	
 	
 
 	public void addCategory(String title, double weight, ArrayList<Entry> entries) {
@@ -33,6 +37,18 @@ public class Class {
 
 	public void removeCategory(int i) {
 		this.myCategories.remove(i);
+	}
+	
+	public String getTitle(){
+		return this.myTitle;
+	}
+	
+	public String toString(){
+		String categories = "";
+		for(Category c: myCategories){
+			categories += c.toString() + "\n";
+		}
+		return "\n"+ myTitle + "\n" + categories;
 	}
 
 	public void addToGradingScale(int num) {
@@ -48,6 +64,16 @@ public class Class {
 		}
 		
 		return totalGrade;
+	}
+	
+	
+	public void contructNodes(DefaultMutableTreeNode topNode){
+		DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(this.myTitle);
+		for(Category c: myCategories){
+			c.constructNodes(classNode);
+		}
+		topNode.add(classNode);
+		
 	}
 
 }
