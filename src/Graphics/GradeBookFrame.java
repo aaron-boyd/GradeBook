@@ -4,27 +4,29 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import FileManipulation.DirectoryManager;
 import Organization.Semester;
 
 public class GradeBookFrame extends JFrame {
 	
-	private Semester currentSem;
-	
+	private Semester myCurrentSemester;
+	private DirectoryManager myDirectoryManager;
+	private ClassesPanel myClassesPanel;
+	private MenuBar myMenuBar;
 
-	public GradeBookFrame() {
-		MenuBar menuBar = new MenuBar();
-		this.setJMenuBar(menuBar);
-		setSize(new Dimension(500,500));
-	
+	public GradeBookFrame(DirectoryManager directoryManager) {
+		this.myClassesPanel = new ClassesPanel(myCurrentSemester,this);
+		this.myMenuBar = new MenuBar(directoryManager,myCurrentSemester,myClassesPanel);
+		this.setJMenuBar(this.myMenuBar);
+		setSize(new Dimension(1000,1000));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setTitle("GradeBook");
 		setVisible(true);
+		this.getContentPane().add(this.myClassesPanel);
 		
-		ClassesPanel panel = new ClassesPanel();
-		panel.contructTree();
-		
-		this.add(panel);
 	}
+	
+
 }

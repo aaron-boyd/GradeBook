@@ -1,4 +1,7 @@
 package Organization;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -11,6 +14,12 @@ public class Category {
 
 	public Category() {
 		this.myTitle = "";
+		this.myWeight = 0.0;
+		this.myEntries = new ArrayList<Entry>(0);
+	}
+	
+	public Category(String title){
+		this.myTitle = title;
 		this.myWeight = 0.0;
 		this.myEntries = new ArrayList<Entry>(0);
 	}
@@ -49,6 +58,26 @@ public class Category {
 
 	public void removeEntry(int i) {
 		this.myEntries.remove(i);
+	}
+	
+	public void openCategory(String dir){
+		String directory = dir + "\\" + this.myTitle + "\\Entries.txt";
+		File f = new File(directory);
+		try{
+		BufferedReader reader = new BufferedReader(new FileReader(f));
+		String line;
+		line = reader.readLine();
+		this.myWeight = Double.parseDouble(line);
+		while((line = reader.readLine()) != null){
+			String[] parts = line.split("_");
+			Entry newEntry = new Entry(parts[0], Double.parseDouble(parts[1]),Double.parseDouble(parts[2]));
+			System.out.println(newEntry.toString());
+			this.myEntries.add(newEntry);
+		}
+		}catch(Exception e){
+			
+		}
+				
 	}
 	
 	public String toString(){

@@ -1,6 +1,10 @@
 package FileManipulation;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import Organization.Semester;
 
 public class DirectoryManager {
 
@@ -24,6 +28,16 @@ public class DirectoryManager {
 			return true;
 		}
 		return false;
+	}
+	
+	public List<String> checkForSemesters(){
+		File f = new File(myHomeDirectory + "GradeBook");
+		return (List<String>)Arrays.asList(f.list());
+	}
+	
+	
+	public String getHomeDirectory(){
+		return this.myHomeDirectory;
 	}
 
 }

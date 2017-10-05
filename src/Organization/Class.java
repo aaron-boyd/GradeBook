@@ -1,13 +1,16 @@
 package Organization;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Class {
 	private String myTitle;
 	private ArrayList<Category> myCategories;
-	private ArrayList<Integer> myGradingScale;
 
 	public Class() {
 		this.myTitle = "";
@@ -18,14 +21,11 @@ public class Class {
 		this.myTitle = title;
 		this.myCategories = new ArrayList<Category>(0);
 	}
-	
+
 	public Class(String title, ArrayList<Category> categories) {
 		this.myTitle = title;
 		this.myCategories = new ArrayList<Category>(categories);
 	}
-
-	
-	
 
 	public void addCategory(String title, double weight, ArrayList<Entry> entries) {
 		this.myCategories.add(new Category(title, weight, entries));
@@ -38,23 +38,30 @@ public class Class {
 	public void removeCategory(int i) {
 		this.myCategories.remove(i);
 	}
-	
-	public String getTitle(){
+
+	public String getTitle() {
 		return this.myTitle;
 	}
-	
-	public String toString(){
-		String categories = "";
-		for(Category c: myCategories){
-			categories += c.toString() + "\n";
+
+	public void openClass(String dir) {
+		String directory = dir + "\\" + this.myTitle;
+		File f = new File(directory);
+		List<String> categories = (List<String>)Arrays.asList(f.list());
+		for(String s: categories){
+			Category newCategory = new Category(s);
+			newCategory.openCategory(directory);
+			this.myCategories.add(newCategory);
 		}
-		return "\n"+ myTitle + "\n" + categories;
 	}
 
-	public void addToGradingScale(int num) {
-		this.myGradingScale.add(num);
-		Collections.sort(this.myGradingScale);
+	public String toString() {
+		String categories = "";
+		for (Category c : myCategories) {
+			categories += c.toString() + "\n";
+		}
+		return "\n" + myTitle + "\n" + categories;
 	}
+
 
 	public double calculateGrade() {
 		double totalGrade = 0.0;
@@ -62,18 +69,17 @@ public class Class {
 		for (Category c : myCategories) {
 			totalGrade += c.getCategoryGrade();
 		}
-		
+
 		return totalGrade;
 	}
-	
-	
-	public void contructNodes(DefaultMutableTreeNode topNode){
+
+	public void contructNodes(DefaultMutableTreeNode topNode) {
 		DefaultMutableTreeNode classNode = new DefaultMutableTreeNode(this.myTitle);
-		for(Category c: myCategories){
+		for (Category c : myCategories) {
 			c.constructNodes(classNode);
 		}
 		topNode.add(classNode);
-		
+
 	}
 
 }
