@@ -35,6 +35,10 @@ public class Class {
 		this.myCategories.add(new Category(title, weight));
 	}
 
+	public ArrayList<Category> getCategories() {
+		return this.myCategories;
+	}
+
 	public void removeCategory(int i) {
 		this.myCategories.remove(i);
 	}
@@ -46,8 +50,8 @@ public class Class {
 	public void openClass(String dir) {
 		String directory = dir + "\\" + this.myTitle;
 		File f = new File(directory);
-		List<String> categories = (List<String>)Arrays.asList(f.list());
-		for(String s: categories){
+		List<String> categories = (List<String>) Arrays.asList(f.list());
+		for (String s : categories) {
 			Category newCategory = new Category(s);
 			newCategory.openCategory(directory);
 			this.myCategories.add(newCategory);
@@ -61,7 +65,6 @@ public class Class {
 		}
 		return "\n" + myTitle + "\n" + categories;
 	}
-
 
 	public double calculateGrade() {
 		double totalGrade = 0.0;
@@ -80,6 +83,10 @@ public class Class {
 		}
 		topNode.add(classNode);
 
+	}
+
+	public Category getCategory(int index) {
+		return myCategories.get(index);
 	}
 
 }

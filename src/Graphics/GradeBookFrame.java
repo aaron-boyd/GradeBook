@@ -11,20 +11,21 @@ public class GradeBookFrame extends JFrame {
 	
 	private Semester myCurrentSemester;
 	private DirectoryManager myDirectoryManager;
-	private ClassesPanel myClassesPanel;
+	private MainPanel myMainPanel;
 	private MenuBar myMenuBar;
 
 	public GradeBookFrame(DirectoryManager directoryManager) {
-		this.myClassesPanel = new ClassesPanel(myCurrentSemester,this);
-		this.myMenuBar = new MenuBar(directoryManager,myCurrentSemester,myClassesPanel);
+		this.myMainPanel = new MainPanel(myCurrentSemester, this);
+		this.myMenuBar = new MenuBar(directoryManager,myCurrentSemester,myMainPanel);
 		this.setJMenuBar(this.myMenuBar);
-		setSize(new Dimension(1000,1000));
+		setSize(new Dimension(1500,1000));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setTitle("GradeBook");
 		setVisible(true);
-		this.getContentPane().add(this.myClassesPanel);
+		this.getContentPane().add(this.myMainPanel);
+		this.revalidate();
 		
 	}
 	

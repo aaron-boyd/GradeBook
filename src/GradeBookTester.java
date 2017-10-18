@@ -16,6 +16,7 @@ public class GradeBookTester {
 	public static void main(String[] args) {
 		DirectoryManager directoryManager = new DirectoryManager();
 		GradeBookFrame gradeBookFrame = new GradeBookFrame(directoryManager);
+		
 		if (directoryManager.checkIfNew()) {
 			directoryManager.createNewDirectory("GradeBook");
 			System.out.println("Welcome to GradeBook new user...");

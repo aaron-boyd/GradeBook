@@ -37,9 +37,17 @@ public class Semester {
 		this.myClasses.add(cls);
 	}
 	
+	public Class getClass(int index){
+		return myClasses.get(index);
+	}
+	
 	
 	public String getTitle(){
 		return myTitle;
+	}
+	
+	public ArrayList<Class> getClasses(){
+		return this.myClasses;
 	}
 	
 	public DefaultMutableTreeNode createNodes(){
