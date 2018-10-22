@@ -1,0 +1,11 @@
+src/FileManipulation/DirectoryManager.class
+src/GradeBookTester.class
+src/Graphics/AssignmentPanel.class
+src/Graphics/ClassesPanel.class
+src/Graphics/GradeBookFrame.class
+src/Graphics/MainPanel.class
+src/Graphics/MenuBar.class
+src/Organization/Category.class
+src/Organization/Class.class
+src/Organization/Entry.class
+src/Organization/Semester.class
